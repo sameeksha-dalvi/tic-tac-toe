@@ -1,5 +1,20 @@
 
 const Gameboard = (function () {
+    const rows = 3;
+    const colums = 3;
+    const board = [];
+
+    for(let i = 0 ; i < rows ; i++){
+        board[i] = [];
+        for(let j = 0 ; j < colums ; j++){
+            board[i][j] = '';
+        }
+    }
+
+    const getBoard = () => board;
+    
+
+    return { getBoard };
 
 })();
 
@@ -24,3 +39,5 @@ const player2 = createPlayer("Mani","O");
 
 console.log("Player One: "+player1.getName());
 console.log("Player Two: "+player2.getName());
+
+
