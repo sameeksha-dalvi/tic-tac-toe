@@ -12,9 +12,20 @@ const Gameboard = (function () {
     }
 
     const getBoard = () => board;
+
+     const printBoard = () =>{
+        for(let i = 0 ; i < rows ; i++){
+            let rowString = "";
+            for(let j = 0 ; j < colums ; j++){
+            rowString += board[i][j] + " ";
+            }
+            console.log(rowString);
+        }
+
+    }
     
 
-    return { getBoard };
+    return { getBoard, printBoard };
 
 })();
 
