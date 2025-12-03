@@ -28,7 +28,15 @@ const Gameboard = (function () {
         board[row][col] = marker;
     }
 
-    return { getBoard, printBoard, placeMark };
+    const isCellEmpty = (row, col) =>{
+        if(board[row][col] == ''){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    return { getBoard, printBoard, placeMark, isCellEmpty };
 
 })();
 
