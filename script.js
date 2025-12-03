@@ -13,7 +13,7 @@ const Gameboard = (function () {
 
     const getBoard = () => board;
 
-     const printBoard = () =>{
+    const printBoard = () =>{
         for(let i = 0 ; i < rows ; i++){
             let rowString = "";
             for(let j = 0 ; j < colums ; j++){
@@ -24,8 +24,11 @@ const Gameboard = (function () {
 
     }
     
+    const placeMark = (row,col,marker) =>{
+        board[row][col] = marker;
+    }
 
-    return { getBoard, printBoard };
+    return { getBoard, printBoard, placeMark };
 
 })();
 
