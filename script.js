@@ -4,39 +4,48 @@ const Gameboard = (function () {
     const colums = 3;
     const board = [];
 
-    for(let i = 0 ; i < rows ; i++){
+    for (let i = 0; i < rows; i++) {
         board[i] = [];
-        for(let j = 0 ; j < colums ; j++){
+        for (let j = 0; j < colums; j++) {
             board[i][j] = '';
         }
     }
 
     const getBoard = () => board;
 
-    const printBoard = () =>{
-        for(let i = 0 ; i < rows ; i++){
+    const printBoard = () => {
+        for (let i = 0; i < rows; i++) {
             let rowString = "";
-            for(let j = 0 ; j < colums ; j++){
-            rowString += board[i][j] + " ";
+            for (let j = 0; j < colums; j++) {
+                rowString += board[i][j] + " ";
             }
             console.log(rowString);
         }
 
     }
-    
-    const placeMark = (row,col,marker) =>{
+
+    const placeMark = (row, col, marker) => {
         board[row][col] = marker;
     }
 
-    const isCellEmpty = (row, col) =>{
-        if(board[row][col] == ''){
+    const isCellEmpty = (row, col) => {
+        if (board[row][col] == '') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    return { getBoard, printBoard, placeMark, isCellEmpty };
+    const resetBoard = () => {
+        for (let i = 0; i < rows; i++) {
+            board[i] = [];
+            for (let j = 0; j < colums; j++) {
+                board[i][j] = '';
+            }
+        }
+    }
+
+    return { getBoard, printBoard, placeMark, isCellEmpty, resetBoard };
 
 })();
 
@@ -56,10 +65,23 @@ function createPlayer(name, marker) {
     return { getName, getMarker };
 }
 
-const player1 = createPlayer("Sameeksha","X");
-const player2 = createPlayer("Mani","O");
+const player1 = createPlayer("Sameeksha", "X");
+const player2 = createPlayer("Mani", "O");
 
-console.log("Player One: "+player1.getName());
-console.log("Player Two: "+player2.getName());
+console.log("Player One: " + player1.getName());
+console.log("Player Two: " + player2.getName());
 
 
+Gameboard.placeMark(0,0,'X');
+Gameboard.placeMark(0,1,'O');
+Gameboard.placeMark(0,2,'X');
+Gameboard.placeMark(1,0,'X');
+Gameboard.placeMark(1,1,'O');
+Gameboard.placeMark(1,2,'O');
+Gameboard.placeMark(2,0,'O');
+Gameboard.placeMark(2,1,'X');
+Gameboard.placeMark(2,2,'X');
+
+//console.log(Gameboard.isCellEmpty(0,1));
+
+Gameboard.printBoard();
