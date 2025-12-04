@@ -72,33 +72,97 @@ const DisplayController = (function () {
 
 const GameLogicController = (function () {
     let currentPlayer = player1;
+    let winner = "";
 
     const getCurrentPlayer = () => currentPlayer;
 
-    const switchTurn = () =>{
+    const switchTurn = () => {
 
-        if(currentPlayer.getName() == player1.getName()){
+        if (currentPlayer.getName() == player1.getName()) {
             currentPlayer = player2;
-        }else{
+        } else {
             currentPlayer = player1;
         }
 
     }
 
-    const playRound = (row,col) =>{
-        
-        if(Gameboard.isCellEmpty(row,col)){
+    const playRound = (row, col) => {
 
-            Gameboard.placeMark(row,col,currentPlayer.getMarker());
+        if (Gameboard.isCellEmpty(row, col)) {
+
+            Gameboard.placeMark(row, col, currentPlayer.getMarker());
             Gameboard.printBoard();
             GameLogicController.switchTurn();
 
-        }else{
+        } else {
             return false;
         }
     }
 
-    return {getCurrentPlayer, switchTurn, playRound};
+    const checkWinner = () => {
+        //check rows
+
+        if (GameLogicController.getRowElement(0) == '["X","X","X"]'
+            || GameLogicController.getRowElement(1) == '["X","X","X"]'
+            || GameLogicController.getRowElement(2) == '["X","X","X"]'
+            || GameLogicController.getColumnElement(0) == '["X","X","X"]'
+            || GameLogicController.getColumnElement(1) == '["X","X","X"]'
+            || GameLogicController.getColumnElement(2) == '["X","X","X"]'
+            || GameLogicController.getFirstDiagonal() == '["X","X","X"]'
+            || GameLogicController.getSecondDiagonal() == '["X","X","X"]'
+        ) {
+            return 'X'
+
+        }
+
+        if (GameLogicController.getRowElement(0) == '["O","O","O"]'
+            || GameLogicController.getRowElement(1) == '["O","O","O"]'
+            || GameLogicController.getRowElement(2) == '["O","O","O"]'
+            || GameLogicController.getColumnElement(0) == '["O","O","O"]'
+            || GameLogicController.getColumnElement(1) == '["O","O","O"]'
+            || GameLogicController.getColumnElement(2) == '["O","O","O"]'
+            || GameLogicController.getFirstDiagonal() == '["O","O","O"]'
+            || GameLogicController.getSecondDiagonal() == '["O","O","O"]') {
+
+            return 'O';
+        }
+
+        return false;
+
+
+    }
+
+    const getRowElement = (index) => JSON.stringify(Gameboard.getBoard()[index]);
+
+    const getColumnElement = (index) => JSON.stringify(Gameboard.getBoard().map(row => row[index]));
+
+    const getFirstDiagonal = () => {
+
+        const firstDiagonal = [];
+        const len = Gameboard.getBoard().length;
+
+        for (let i = 0; i < len; i++) {
+            firstDiagonal.push(Gameboard.getBoard()[i][i]);
+        }
+
+        return JSON.stringify(firstDiagonal);
+    }
+
+
+    const getSecondDiagonal = () => {
+
+        const secondDiagonal = [];
+        const len = Gameboard.getBoard().length;
+
+        for (let i = 0; i < len; i++) {
+            secondDiagonal.push(Gameboard.getBoard()[i][len - 1 - i]);
+        }
+
+        return JSON.stringify(secondDiagonal);
+    }
+
+
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner };
 
 })();
 
@@ -122,7 +186,26 @@ const GameLogicController = (function () {
 
 // console.log(GameLogicController.getCurrentPlayer().getName());
 
-console.log(GameLogicController.playRound(0,0));
-console.log(GameLogicController.playRound(0,1));
-console.log(GameLogicController.playRound(1,1));
-console.log(GameLogicController.playRound(2,2));
+console.log(GameLogicController.playRound(0, 0));
+console.log(GameLogicController.playRound(0, 2));
+console.log(GameLogicController.playRound(1, 1));
+console.log(GameLogicController.playRound(1, 2));
+console.log(GameLogicController.playRound(2, 2));
+
+//console.log(JSON.stringify(Gameboard.getBoard()[][0]));
+
+//console.log(Gameboard.getBoard().map(row => row[0]));
+
+const result = GameLogicController.checkWinner();
+
+if (result) {
+    console.log("winner : " + result);
+
+    if (player1.getMarker() == result) {
+        console.log("winner name: " + player1.getName());
+    }
+
+    if (player2.getMarker() == result) {
+        console.log("winner name: " + player2.getName());
+    }
+}
