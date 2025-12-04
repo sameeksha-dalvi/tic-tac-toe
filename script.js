@@ -71,40 +71,58 @@ const DisplayController = (function () {
 })();
 
 const GameLogicController = (function () {
-    let currentPlayer = player1.getName();
+    let currentPlayer = player1;
 
     const getCurrentPlayer = () => currentPlayer;
 
     const switchTurn = () =>{
 
-        if(currentPlayer == player1.getName()){
-            currentPlayer = player2.getName();
+        if(currentPlayer.getName() == player1.getName()){
+            currentPlayer = player2;
         }else{
-            currentPlayer = player1.getName();
+            currentPlayer = player1;
         }
 
     }
 
-    return {getCurrentPlayer, switchTurn};
+    const playRound = (row,col) =>{
+        
+        if(Gameboard.isCellEmpty(row,col)){
+
+            Gameboard.placeMark(row,col,currentPlayer.getMarker());
+            Gameboard.printBoard();
+            GameLogicController.switchTurn();
+
+        }else{
+            return false;
+        }
+    }
+
+    return {getCurrentPlayer, switchTurn, playRound};
 
 })();
 
-Gameboard.placeMark(0,0,'X');
-Gameboard.placeMark(0,1,'O');
-Gameboard.placeMark(0,2,'X');
-Gameboard.placeMark(1,0,'X');
-Gameboard.placeMark(1,1,'O');
-Gameboard.placeMark(1,2,'O');
-Gameboard.placeMark(2,0,'O');
-Gameboard.placeMark(2,1,'X');
-Gameboard.placeMark(2,2,'X');
+//Gameboard.placeMark(0,0,'X');
+// Gameboard.placeMark(0,1,'O');
+// Gameboard.placeMark(0,2,'X');
+// Gameboard.placeMark(1,0,'X');
+// Gameboard.placeMark(1,1,'O');
+// Gameboard.placeMark(1,2,'O');
+// Gameboard.placeMark(2,0,'O');
+// Gameboard.placeMark(2,1,'X');
+// Gameboard.placeMark(2,2,'X');
 
 //console.log(Gameboard.isCellEmpty(0,1));
 
-Gameboard.printBoard();
+//Gameboard.printBoard();
 
-console.log(GameLogicController.getCurrentPlayer());
+// console.log(GameLogicController.getCurrentPlayer().getName());
 
-console.log(GameLogicController.switchTurn());
+// console.log(GameLogicController.switchTurn());
 
-console.log(GameLogicController.getCurrentPlayer());
+// console.log(GameLogicController.getCurrentPlayer().getName());
+
+console.log(GameLogicController.playRound(0,0));
+console.log(GameLogicController.playRound(0,1));
+console.log(GameLogicController.playRound(1,1));
+console.log(GameLogicController.playRound(2,2));
