@@ -1,6 +1,3 @@
-
-
-
 function createPlayer(name, marker) {
     const getName = () => name;
     const getMarker = () => marker;
@@ -92,7 +89,20 @@ const GameLogicController = (function () {
 
             Gameboard.placeMark(row, col, currentPlayer.getMarker());
             Gameboard.printBoard();
-            GameLogicController.switchTurn();
+
+            winner = GameLogicController.checkWinner();
+
+            if (winner) {
+
+                return winner;
+
+            } else if (GameLogicController.checkDraw()) {
+
+                return 'draw';
+            } else {
+                GameLogicController.switchTurn();
+            }
+
 
         } else {
             return false;
@@ -100,7 +110,7 @@ const GameLogicController = (function () {
     }
 
     const checkWinner = () => {
-    
+
         if (GameLogicController.getRowElement(0) == '["X","X","X"]'
             || GameLogicController.getRowElement(1) == '["X","X","X"]'
             || GameLogicController.getRowElement(2) == '["X","X","X"]'
@@ -161,11 +171,11 @@ const GameLogicController = (function () {
     }
 
 
-    const checkDraw = () =>{
+    const checkDraw = () => {
         let len = Gameboard.getBoard().length;
-        for(let i = 0 ; i < len ; i ++){
-            for(let j = 0 ; j < len ; j++){
-                if(Gameboard.getBoard()[i][j]== ''){
+        for (let i = 0; i < len; i++) {
+            for (let j = 0; j < len; j++) {
+                if (Gameboard.getBoard()[i][j] == '') {
                     return false;
                 }
             }
@@ -201,6 +211,11 @@ const GameLogicController = (function () {
 console.log(GameLogicController.playRound(0, 0));
 console.log(GameLogicController.playRound(0, 2));
 console.log(GameLogicController.playRound(1, 1));
+
+const isDraw = GameLogicController.checkDraw();
+
+console.log("Draw :" + isDraw);
+
 console.log(GameLogicController.playRound(1, 2));
 console.log(GameLogicController.playRound(2, 2));
 
