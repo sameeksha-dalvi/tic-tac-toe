@@ -100,8 +100,7 @@ const GameLogicController = (function () {
     }
 
     const checkWinner = () => {
-        //check rows
-
+    
         if (GameLogicController.getRowElement(0) == '["X","X","X"]'
             || GameLogicController.getRowElement(1) == '["X","X","X"]'
             || GameLogicController.getRowElement(2) == '["X","X","X"]'
@@ -162,7 +161,20 @@ const GameLogicController = (function () {
     }
 
 
-    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner };
+    const checkDraw = () =>{
+        let len = Gameboard.getBoard().length;
+        for(let i = 0 ; i < len ; i ++){
+            for(let j = 0 ; j < len ; j++){
+                if(Gameboard.getBoard()[i][j]== ''){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw };
 
 })();
 
