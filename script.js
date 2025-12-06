@@ -212,10 +212,6 @@ console.log(GameLogicController.playRound(0, 0));
 console.log(GameLogicController.playRound(0, 2));
 console.log(GameLogicController.playRound(1, 1));
 
-const isDraw = GameLogicController.checkDraw();
-
-console.log("Draw :" + isDraw);
-
 console.log(GameLogicController.playRound(1, 2));
 console.log(GameLogicController.playRound(2, 2));
 
@@ -223,16 +219,16 @@ console.log(GameLogicController.playRound(2, 2));
 
 //console.log(Gameboard.getBoard().map(row => row[0]));
 
-const result = GameLogicController.checkWinner();
+// const result = GameLogicController.checkWinner();
 
-if (result) {
-    console.log("winner : " + result);
+// if (result) {
+//     console.log("winner : " + result);
 
-    if (player1.getMarker() == result) {
-        console.log("winner name: " + player1.getName());
-    }
+//     if (player1.getMarker() == result) {
+//         console.log("winner name: " + player1.getName());
+//     }
 
-    if (player2.getMarker() == result) {
-        console.log("winner name: " + player2.getName());
-    }
-}
+//     if (player2.getMarker() == result) {
+//         console.log("winner name: " + player2.getName());
+//     }
+// }
