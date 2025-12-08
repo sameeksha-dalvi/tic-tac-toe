@@ -232,3 +232,22 @@ console.log(GameLogicController.playRound(2, 2));
 //         console.log("winner name: " + player2.getName());
 //     }
 // }
+
+
+const boardContainer = document.querySelector(".board");
+
+boardContainer.addEventListener('click',function(e){
+    const clickedCell = e.target;
+    const boardCells = Array.from(boardContainer.children);
+    const index = boardCells.indexOf(clickedCell);
+    const{ row: row, col:col} = getCellPosition(index);
+
+console.log(row +" "+col);
+});
+
+function getCellPosition(index){
+     const rowPosition = Math.floor(index / 3);
+     const colPosition = index % 3;
+     
+     return{ row: rowPosition , col: colPosition};
+}
