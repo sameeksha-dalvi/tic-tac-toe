@@ -65,6 +65,16 @@ const Gameboard = (function () {
 
 const DisplayController = (function () {
 
+    const resetBoardUI = (boardCells) =>{
+        const len = boardCells.length;
+        for(let i = 0 ; i < len ; i++){
+            boardCells[i].textContent = '';
+        }
+        Gameboard.resetBoard();
+    }
+
+    return {resetBoardUI};
+
 })();
 
 const GameLogicController = (function () {
@@ -251,3 +261,10 @@ function getCellPosition(index){
      
      return{ row: rowPosition , col: colPosition};
 }
+
+const resetBtn = document.querySelector("#resetBtn");
+
+resetBtn.addEventListener('click',function(){
+    const boardCells = Array.from(boardContainer.children);
+    DisplayController.resetBoardUI(boardCells);
+});
