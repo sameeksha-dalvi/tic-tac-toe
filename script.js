@@ -65,15 +65,34 @@ const Gameboard = (function () {
 
 const DisplayController = (function () {
 
-    const resetBoardUI = (boardCells) =>{
+    const resetBoardUI = (boardCells) => {
         const len = boardCells.length;
-        for(let i = 0 ; i < len ; i++){
+        for (let i = 0; i < len; i++) {
             boardCells[i].textContent = '';
         }
         Gameboard.resetBoard();
     }
 
-    return {resetBoardUI};
+    const markCell = (row, col, clickedCell) => {
+
+        const marker = GameLogicController.getCurrentPlayer().getMarker();;
+
+        const result = GameLogicController.playRound(row, col);
+
+        if (result) {
+            if (result == 'X' || result == 'O') {
+                alert("Winner is " + result);
+            } else if (result == 'draw') {
+                alert(result);
+            }
+
+
+            clickedCell.textContent = marker;
+        }
+
+    }
+
+    return { resetBoardUI, markCell };
 
 })();
 
@@ -111,6 +130,7 @@ const GameLogicController = (function () {
                 return 'draw';
             } else {
                 GameLogicController.switchTurn();
+                return true;
             }
 
 
@@ -198,73 +218,29 @@ const GameLogicController = (function () {
 
 })();
 
-//Gameboard.placeMark(0,0,'X');
-// Gameboard.placeMark(0,1,'O');
-// Gameboard.placeMark(0,2,'X');
-// Gameboard.placeMark(1,0,'X');
-// Gameboard.placeMark(1,1,'O');
-// Gameboard.placeMark(1,2,'O');
-// Gameboard.placeMark(2,0,'O');
-// Gameboard.placeMark(2,1,'X');
-// Gameboard.placeMark(2,2,'X');
-
-//console.log(Gameboard.isCellEmpty(0,1));
-
-//Gameboard.printBoard();
-
-// console.log(GameLogicController.getCurrentPlayer().getName());
-
-// console.log(GameLogicController.switchTurn());
-
-// console.log(GameLogicController.getCurrentPlayer().getName());
-
-console.log(GameLogicController.playRound(0, 0));
-console.log(GameLogicController.playRound(0, 2));
-console.log(GameLogicController.playRound(1, 1));
-
-console.log(GameLogicController.playRound(1, 2));
-console.log(GameLogicController.playRound(2, 2));
-
-//console.log(JSON.stringify(Gameboard.getBoard()[][0]));
-
-//console.log(Gameboard.getBoard().map(row => row[0]));
-
-// const result = GameLogicController.checkWinner();
-
-// if (result) {
-//     console.log("winner : " + result);
-
-//     if (player1.getMarker() == result) {
-//         console.log("winner name: " + player1.getName());
-//     }
-
-//     if (player2.getMarker() == result) {
-//         console.log("winner name: " + player2.getName());
-//     }
-// }
 
 
 const boardContainer = document.querySelector(".board");
 
-boardContainer.addEventListener('click',function(e){
+boardContainer.addEventListener('click', function (e) {
     const clickedCell = e.target;
     const boardCells = Array.from(boardContainer.children);
     const index = boardCells.indexOf(clickedCell);
-    const{ row: row, col:col} = getCellPosition(index);
+    const { row: row, col: col } = getCellPosition(index);
 
-console.log(row +" "+col);
+    DisplayController.markCell(row, col, clickedCell);
 });
 
-function getCellPosition(index){
-     const rowPosition = Math.floor(index / 3);
-     const colPosition = index % 3;
-     
-     return{ row: rowPosition , col: colPosition};
+function getCellPosition(index) {
+    const rowPosition = Math.floor(index / 3);
+    const colPosition = index % 3;
+
+    return { row: rowPosition, col: colPosition };
 }
 
 const resetBtn = document.querySelector("#resetBtn");
 
-resetBtn.addEventListener('click',function(){
+resetBtn.addEventListener('click', function () {
     const boardCells = Array.from(boardContainer.children);
     DisplayController.resetBoardUI(boardCells);
 });
