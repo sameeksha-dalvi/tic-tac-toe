@@ -101,3 +101,9 @@ body{
     letter-spacing: 3px;
     color: var(--winner-msg);
 }
+
+.draw-msg{
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: var(--draw-msg);
+}
