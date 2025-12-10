@@ -73,3 +73,11 @@ body{
 .btn:hover{
     background-color: var(--btn-hover);
 }
+
+.playerX{
+    color: var(--x-marker);
+}
+
+.playerO{
+    color: var(--o-marker);
+}

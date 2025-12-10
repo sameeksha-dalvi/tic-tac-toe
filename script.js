@@ -75,7 +75,15 @@ const DisplayController = (function () {
 
     const markCell = (row, col, clickedCell) => {
 
-        const marker = GameLogicController.getCurrentPlayer().getMarker();;
+        const marker = GameLogicController.getCurrentPlayer().getMarker();
+
+        if(marker == 'X'){
+            clickedCell.classList.add('playerX');
+        }
+
+        if(marker == 'O'){
+            clickedCell.classList.add('playerO');
+        }
 
         const result = GameLogicController.playRound(row, col);
 
