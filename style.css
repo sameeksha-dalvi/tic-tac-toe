@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Orbitron';
+    src: url('fonts/Orbitron-Regular.woff2') format('woff2'),
+        url('fonts/Orbitron-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 :root{
     --bg : #0F172A;
     --txt : #E2E8F0;
@@ -14,6 +24,7 @@
 body{
     background-color: var(--bg);
     color: var(--txt);
+    
 }
 
 .container{
@@ -21,6 +32,7 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    font-family: Orbitron ,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .board{
@@ -62,12 +74,14 @@ body{
 
 .btn{
     border:none;
+    font-family: Orbitron,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: var(--btn);
     color: var(--bg);
     padding: 10px 20px;
     font-size: 20px;
     border-radius: 10px;
     font-weight: 600;
+    letter-spacing: 2px;
 }
 
 .btn:hover{
