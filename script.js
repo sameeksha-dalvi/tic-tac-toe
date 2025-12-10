@@ -72,6 +72,11 @@ const DisplayController = (function () {
             boardCells[i].classList.remove('playerX');
             boardCells[i].classList.remove('playerO');
         }
+        const winnerMsgShown = document.querySelector('.winner-msg');
+        if(winnerMsgShown){
+                winnerMsgShown.remove();
+        }
+        
         Gameboard.resetBoard();
     }
 
@@ -93,7 +98,17 @@ const DisplayController = (function () {
 
         if (result) {
             if (result == 'X' || result == 'O') {
-                alert("Winner is " + result);
+                const displayWinnerDiv = document.querySelector('.winner');
+
+                const winnerMsg = document.createElement('div');
+
+                winnerMsg.className = 'winner-msg';
+
+                winnerMsg.textContent = "Winner is : " + result;
+
+                displayWinnerDiv.appendChild(winnerMsg);
+
+                //alert("Winner is " + result);
             } else if (result == 'draw') {
                 alert(result);
             }

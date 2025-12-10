@@ -95,3 +95,9 @@ body{
 .playerO{
     color: var(--o-marker);
 }
+
+.winner-msg{
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: var(--winner-msg);
+}
