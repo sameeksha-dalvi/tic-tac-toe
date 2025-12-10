@@ -69,6 +69,8 @@ const DisplayController = (function () {
         const len = boardCells.length;
         for (let i = 0; i < len; i++) {
             boardCells[i].textContent = '';
+            boardCells[i].classList.remove('playerX');
+            boardCells[i].classList.remove('playerO');
         }
         Gameboard.resetBoard();
     }
@@ -79,10 +81,12 @@ const DisplayController = (function () {
 
         if(marker == 'X'){
             clickedCell.classList.add('playerX');
+            console.log('add class playerX ');
         }
 
         if(marker == 'O'){
             clickedCell.classList.add('playerO');
+            console.log('add class playerX ');
         }
 
         const result = GameLogicController.playRound(row, col);
