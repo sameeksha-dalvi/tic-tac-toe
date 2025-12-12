@@ -120,6 +120,8 @@ const DisplayController = (function () {
         if (drawMsgShown) {
             drawMsgShown.remove();
         }
+        
+        GameLogicController.resetGameOver();
 
         Gameboard.resetBoard();
     }
@@ -207,6 +209,7 @@ const DisplayController = (function () {
 const GameLogicController = (function () {
     let currentPlayer = null;
     let winner = "";
+    let gameOver = false;
 
     const getCurrentPlayer = () => currentPlayer;
 
@@ -218,9 +221,13 @@ const GameLogicController = (function () {
             currentPlayer = player1;
         }
 
-    }
+    };
 
     const playRound = (row, col) => {
+
+        if(gameOver){
+            return false;
+        }
 
         if (Gameboard.isCellEmpty(row, col)) {
 
@@ -230,11 +237,11 @@ const GameLogicController = (function () {
             winner = GameLogicController.checkWinner();
 
             if (winner) {
-
+                gameOver = true;
                 return winner;
 
             } else if (GameLogicController.checkDraw()) {
-
+                gameOver = true;
                 return 'draw';
             } else {
                 GameLogicController.switchTurn();
@@ -245,7 +252,7 @@ const GameLogicController = (function () {
         } else {
             return false;
         }
-    }
+    };
 
     const checkWinner = () => {
 
@@ -277,7 +284,7 @@ const GameLogicController = (function () {
         return false;
 
 
-    }
+    };
 
     const getRowElement = (index) => JSON.stringify(Gameboard.getBoard()[index]);
 
@@ -293,7 +300,7 @@ const GameLogicController = (function () {
         }
 
         return JSON.stringify(firstDiagonal);
-    }
+    };
 
 
     const getSecondDiagonal = () => {
@@ -306,7 +313,7 @@ const GameLogicController = (function () {
         }
 
         return JSON.stringify(secondDiagonal);
-    }
+    };
 
 
     const checkDraw = () => {
@@ -320,7 +327,7 @@ const GameLogicController = (function () {
         }
 
         return true;
-    }
+    };
 
     const setPlayers = (p1, p2) => {
         player1 = p1;
@@ -328,7 +335,13 @@ const GameLogicController = (function () {
         currentPlayer = p1;
     };
 
-    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers };
+    const isGameOver = () => gameOver;
+
+    const resetGameOver = () => {
+        gameOver = false;
+    };
+
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers, isGameOver,resetGameOver };
 
 })();
 
