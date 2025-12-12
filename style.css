@@ -160,3 +160,54 @@ body {
     font-size: 20px;
     margin-top: 30px;
 }
+
+.game-screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.playersName{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid var(--borderlines);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+#player1X{
+    width: 50%;
+    text-align: center;
+}
+
+#player2O{
+    width: 50%;
+    text-align: center;
+    
+}
+
+.player1X{
+    background-color: var(--x-marker);
+    color: var(--bg);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.player2O{
+    background-color: var(--o-marker);
+    color: var(--bg);
+    width: 100%;
+}
+
+
+.no-current-player{
+    background-color: var(--bg);
+    color: var(--txt);
+    width: 100%;
+}

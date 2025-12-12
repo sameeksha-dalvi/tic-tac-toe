@@ -25,7 +25,20 @@ startGameBtn.addEventListener('click', () => {
 
     player2 = createPlayer(playerName2, "O");
 
-    GameLogicController.setPlayers(player1,player2);
+    GameLogicController.setPlayers(player1, player2);
+
+    const player1X = document.querySelector('#player1X');
+
+    player1X.textContent = playerName1 + " : X";
+
+    player1X.classList.add('player1X');
+
+    const player2O = document.querySelector('#player2O');
+
+    player2O.textContent = playerName2 + " : O";
+    
+    player2O.classList.add('no-current-player');
+
 
 
     document.querySelector('.setup-screen').classList.add('hidden');
@@ -286,7 +299,7 @@ const GameLogicController = (function () {
         currentPlayer = p1;
     };
 
-    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers};
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers };
 
 })();
 
