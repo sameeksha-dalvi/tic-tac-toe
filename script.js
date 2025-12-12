@@ -8,31 +8,31 @@ function createPlayer(name, marker) {
     return { getName, getMarker };
 }
 
-const startGameBtn =  document.querySelector('#startBtn');
+const startGameBtn = document.querySelector('#startBtn');
 
-startGameBtn.addEventListener('click',()=>{
+startGameBtn.addEventListener('click', () => {
 
     const playerName1 = document.querySelector('#player1-name').value;
     const playerName2 = document.querySelector('#player2-name').value;
 
-    if(playerName1 == '' || playerName2 == ''){
+    if (playerName1 == '' || playerName2 == '') {
         alert("Please enter Player Name");
         return;
     }
 
-   
+
     player1 = createPlayer(playerName1, "X");
 
     player2 = createPlayer(playerName2, "O");
+
+    GameLogicController.setPlayers(player1,player2);
 
 
     document.querySelector('.setup-screen').classList.add('hidden');
     document.querySelector('.game-screen').classList.remove('hidden');
 
-    //alert(player1.getName() + " "+ player2.getName());
 
 
-    
 });
 
 
@@ -100,14 +100,14 @@ const DisplayController = (function () {
 
         const drawMsgShown = document.querySelector('.draw-msg');
 
-        if(winnerMsgShown){
-                winnerMsgShown.remove();
+        if (winnerMsgShown) {
+            winnerMsgShown.remove();
         }
 
-        if(drawMsgShown){
-                drawMsgShown.remove();
+        if (drawMsgShown) {
+            drawMsgShown.remove();
         }
-        
+
         Gameboard.resetBoard();
     }
 
@@ -115,12 +115,12 @@ const DisplayController = (function () {
 
         const marker = GameLogicController.getCurrentPlayer().getMarker();
 
-        if(marker == 'X'){
+        if (marker == 'X') {
             clickedCell.classList.add('playerX');
             console.log('add class playerX ');
         }
 
-        if(marker == 'O'){
+        if (marker == 'O') {
             clickedCell.classList.add('playerO');
             console.log('add class playerX ');
         }
@@ -149,7 +149,7 @@ const DisplayController = (function () {
                 drawMsg.textContent = "It's a Draw!"
 
                 displayDrawDiv.appendChild(drawMsg);
-                
+
             }
 
 
@@ -163,7 +163,7 @@ const DisplayController = (function () {
 })();
 
 const GameLogicController = (function () {
-    let currentPlayer = player1;
+    let currentPlayer = null;
     let winner = "";
 
     const getCurrentPlayer = () => currentPlayer;
@@ -280,7 +280,13 @@ const GameLogicController = (function () {
         return true;
     }
 
-    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw };
+    const setPlayers = (p1, p2) => {
+        player1 = p1;
+        player2 = p2;
+        currentPlayer = p1;
+    };
+
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers};
 
 })();
 
