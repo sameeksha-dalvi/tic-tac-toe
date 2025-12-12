@@ -1,15 +1,39 @@
+let player1 = "";
+let player2 = "";
+
+
 function createPlayer(name, marker) {
     const getName = () => name;
     const getMarker = () => marker;
     return { getName, getMarker };
 }
 
-const player1 = createPlayer("Sameeksha", "X");
-const player2 = createPlayer("Mani", "O");
+const startGameBtn =  document.querySelector('#startBtn');
 
-console.log("Player One: " + player1.getName());
-console.log("Player Two: " + player2.getName());
+startGameBtn.addEventListener('click',()=>{
 
+    const playerName1 = document.querySelector('#player1-name').value;
+    const playerName2 = document.querySelector('#player2-name').value;
+
+    if(playerName1 == '' || playerName2 == ''){
+        alert("Please enter Player Name");
+        return;
+    }
+
+   
+    player1 = createPlayer(playerName1, "X");
+
+    player2 = createPlayer(playerName2, "O");
+
+
+    document.querySelector('.setup-screen').classList.add('hidden');
+    document.querySelector('.game-screen').classList.remove('hidden');
+
+    //alert(player1.getName() + " "+ player2.getName());
+
+
+    
+});
 
 
 const Gameboard = (function () {
@@ -286,3 +310,4 @@ resetBtn.addEventListener('click', function () {
     const boardCells = Array.from(boardContainer.children);
     DisplayController.resetBoardUI(boardCells);
 });
+
