@@ -8,43 +8,43 @@
 }
 
 
-:root{
-    --bg : #0F172A;
-    --txt : #E2E8F0;
+:root {
+    --bg: #0F172A;
+    --txt: #E2E8F0;
     --borderlines: #1E293B;
-    --x-marker:#FF006E;
-    --o-marker:#00F5D4;
-    --cell-hover: rgba(255,255,255,0.06);
-    --winner-msg:#80FF00;
-    --draw-msg:#F1C40F;
-    --btn:#00F2A1;
-    --btn-hover:#0AFFD9;
+    --x-marker: #FF006E;
+    --o-marker: #00F5D4;
+    --cell-hover: rgba(255, 255, 255, 0.06);
+    --winner-msg: #80FF00;
+    --draw-msg: #F1C40F;
+    --btn: #00F2A1;
+    --btn-hover: #0AFFD9;
 }
 
-body{
+body {
     background-color: var(--bg);
     color: var(--txt);
-    
+
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    font-family: Orbitron ,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.board{
+.board {
     display: grid;
     border: 4px solid var(--borderlines);
     width: 500px;
     height: 500px;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
 }
 
-.cell{
+.cell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,29 +52,29 @@ body{
 
 }
 
-.left-cell{
+.left-cell {
     border-right: 3px solid var(--borderlines);
 }
 
-.right-cell{
+.right-cell {
     border-left: 3px solid var(--borderlines);
 }
 
-.top-cell{
+.top-cell {
     border-bottom: 3px solid var(--borderlines);
 }
 
-.bottom-cell{
+.bottom-cell {
     border-top: 3px solid var(--borderlines);
 }
 
-.cell:hover{
+.cell:hover {
     background-color: var(--cell-hover);
 }
 
-.btn{
-    border:none;
-    font-family: Orbitron,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.btn {
+    border: none;
+    font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: var(--btn);
     color: var(--bg);
     padding: 10px 20px;
@@ -84,38 +84,72 @@ body{
     letter-spacing: 2px;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: var(--btn-hover);
 }
 
-.playerX{
+.playerX {
     color: var(--x-marker);
 }
 
-.playerO{
+.playerO {
     color: var(--o-marker);
 }
 
-.winner-msg{
+.winner-msg {
     font-size: 25px;
     letter-spacing: 3px;
     color: var(--winner-msg);
 }
 
-.draw-msg{
+.draw-msg {
     font-size: 25px;
     letter-spacing: 3px;
     color: var(--draw-msg);
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.setup-screen{
+.players {
     width: 300px;
+    min-height: 400px;
     display: flex;
-    align-items: center;
-    justify-content: stretch;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
+}
 
+#player1>label,
+#player2>label {
+    font-size: 20px;
+    color: var(--txt);
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+
+#player1>input,
+#player2>input {
+    width: 95%;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--borderlines);
+    letter-spacing: 3px;
+    font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#player1>input:focus,
+#player2>input:focus {
+    border-color: var(--winner-msg);
+    border-width: 2px;
+    outline: none;
+}
+
+#startBtn{
+    width: 100%;
+    font-size: 20px;
 }
