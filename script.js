@@ -36,7 +36,7 @@ startGameBtn.addEventListener('click', () => {
     const player2O = document.querySelector('#player2O');
 
     player2O.textContent = playerName2 + " : O";
-    
+
     player2O.classList.add('no-current-player');
 
 
@@ -130,12 +130,12 @@ const DisplayController = (function () {
 
         if (marker == 'X') {
             clickedCell.classList.add('playerX');
-            console.log('add class playerX ');
+            //console.log('add class playerX ');
         }
 
         if (marker == 'O') {
             clickedCell.classList.add('playerO');
-            console.log('add class playerX ');
+            //console.log('add class playerX ');
         }
 
         const result = GameLogicController.playRound(row, col);
@@ -151,6 +151,9 @@ const DisplayController = (function () {
                 winnerMsg.textContent = "Winner is : " + result;
 
                 displayWinnerDiv.appendChild(winnerMsg);
+
+                clickedCell.textContent = marker;
+                return;
             } else if (result == 'draw') {
 
                 const displayDrawDiv = document.querySelector('.winner');
@@ -163,15 +166,41 @@ const DisplayController = (function () {
 
                 displayDrawDiv.appendChild(drawMsg);
 
+                clickedCell.textContent = marker;
+
+                return;
+
             }
 
 
             clickedCell.textContent = marker;
+
+            DisplayController.showCurrentPlayer(marker);
+
         }
 
     }
 
-    return { resetBoardUI, markCell };
+
+    const showCurrentPlayer = (turnPlayedMarker) => {
+
+        if (turnPlayedMarker == 'X') {
+            document.querySelector('#player1X').classList.remove('player1X');
+            document.querySelector('#player1X').classList.add('no-current-player');
+            document.querySelector('#player2O').classList.remove('no-current-player')
+            document.querySelector('#player2O').classList.add('player2O');
+        }
+
+        if (turnPlayedMarker == 'O') {
+            document.querySelector('#player1X').classList.remove('no-current-player');
+            document.querySelector('#player1X').classList.add('player1X');
+            document.querySelector('#player2O').classList.remove('player2O')
+            document.querySelector('#player2O').classList.add('no-current-player');
+        }
+
+    }
+
+    return { resetBoardUI, markCell, showCurrentPlayer };
 
 })();
 
