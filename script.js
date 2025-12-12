@@ -120,11 +120,11 @@ const DisplayController = (function () {
         if (drawMsgShown) {
             drawMsgShown.remove();
         }
-        
+
         GameLogicController.resetGameOver();
 
         Gameboard.resetBoard();
-    }
+    };
 
     const markCell = (row, col, clickedCell) => {
 
@@ -181,7 +181,7 @@ const DisplayController = (function () {
 
         }
 
-    }
+    };
 
 
     const showCurrentPlayer = (turnPlayedMarker) => {
@@ -200,9 +200,20 @@ const DisplayController = (function () {
             document.querySelector('#player2O').classList.add('no-current-player');
         }
 
-    }
+    };
 
-    return { resetBoardUI, markCell, showCurrentPlayer };
+    const resetGame = () => {
+
+        document.querySelector('#player1X').className = '';
+        document.querySelector('#player2O').className = '';
+        document.querySelector('#player1-name').value = 'Player 1';
+        document.querySelector('#player2-name').value = 'Player 2';
+        document.querySelector('.setup-screen').classList.remove('hidden');
+        document.querySelector('.game-screen').classList.add('hidden');
+
+    };
+
+    return { resetBoardUI, markCell, showCurrentPlayer, resetGame };
 
 })();
 
@@ -225,7 +236,7 @@ const GameLogicController = (function () {
 
     const playRound = (row, col) => {
 
-        if(gameOver){
+        if (gameOver) {
             return false;
         }
 
@@ -341,7 +352,7 @@ const GameLogicController = (function () {
         gameOver = false;
     };
 
-    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers, isGameOver,resetGameOver };
+    return { getCurrentPlayer, switchTurn, playRound, getRowElement, getColumnElement, getFirstDiagonal, getSecondDiagonal, checkWinner, checkDraw, setPlayers, isGameOver, resetGameOver };
 
 })();
 
@@ -365,10 +376,25 @@ function getCellPosition(index) {
     return { row: rowPosition, col: colPosition };
 }
 
+const playAgainBtn = document.querySelector("#playAgainBtn");
+
+playAgainBtn.addEventListener('click', function () {
+    const boardCells = Array.from(boardContainer.children);
+    DisplayController.resetBoardUI(boardCells);
+    GameLogicController.setPlayers(player1, player2);
+
+    document.querySelector('#player1X').className = 'player1X';
+    document.querySelector('#player2O').className = 'no-current-player';
+});
+
+
 const resetBtn = document.querySelector("#resetBtn");
 
 resetBtn.addEventListener('click', function () {
     const boardCells = Array.from(boardContainer.children);
     DisplayController.resetBoardUI(boardCells);
+    DisplayController.resetGame();
+
 });
+
 

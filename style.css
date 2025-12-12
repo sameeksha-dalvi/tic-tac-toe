@@ -212,3 +212,9 @@ body {
     color: var(--txt);
     width: 100%;
 }
+
+.game-btns{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
