@@ -9,27 +9,47 @@
 </head>
 
 <body>
-    
+
     <div class="container">
         <h1>Tic Tac Toe</h1>
-        <div class="winner"></div>
-        <div class="players"></div>
-        <div class="board">
-            <div class="cell left-cell top-cell"></div>
-            <div class="cell middle-cell top-cell"></div>
-            <div class="cell right-cell top-cell"></div>
-            <div class="cell left-cell"></div>
-            <div class="cell middle-cell"></div>
-            <div class="cell right-cell"></div>
-            <div class="cell left-cell bottom-cell"></div>
-            <div class="cell middle-cell bottom-cell"></div>
-            <div class="cell right-cell bottom-cell"></div>
-        </div>
-        <div>
-            <button id="resetBtn" class="btn">Reset</button>
+        <div class="setup-screen">
+            <div class="players">
+                <div id="player1">
+                    <label for="player1-name">Player 1 : X</label><br>
+                    <input type="text" id="player1-name" placeholder="Player 1 Name" value="Player 1">
+                </div>
+                <div id="player2">
+                    <label for="player2-name">Player 2 : O</label><br>
+                    <input type="text" id="player2-name" placeholder="Player 2 Name" value="Player 2">
+                </div>
+                <div>
+                    <button>Start Game</button>
+                </div>
+
+            </div>
         </div>
 
-        
+        <div class="game-screen">
+            <div class="winner"></div>
+
+            <div class="board">
+                <div class="cell left-cell top-cell"></div>
+                <div class="cell middle-cell top-cell"></div>
+                <div class="cell right-cell top-cell"></div>
+                <div class="cell left-cell"></div>
+                <div class="cell middle-cell"></div>
+                <div class="cell right-cell"></div>
+                <div class="cell left-cell bottom-cell"></div>
+                <div class="cell middle-cell bottom-cell"></div>
+                <div class="cell right-cell bottom-cell"></div>
+            </div>
+            <div>
+                <button id="resetBtn" class="btn">Reset</button>
+            </div>
+
+        </div>
+
+
     </div>
     <script src="script.js"></script>
 </body>
